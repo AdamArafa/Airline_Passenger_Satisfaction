@@ -8,6 +8,7 @@ Created on Sat Oct 23 12:37:29 2021
 import requests 
 from data_in_test import data_in
 
+
 URL = 'http://127.0.0.1:5000/predict'
 
 # defining a headrers dict for the parameters to be sent to the API
@@ -19,3 +20,4 @@ data = {'input' : data_in}
 r = requests.get(URL, headers = headers, json = data)
 
 r.json()
+

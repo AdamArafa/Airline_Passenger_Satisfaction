@@ -23,7 +23,7 @@ Checked the distributions and built many crosstab tables to answer some question
 I also plot a graph to show correlation between features and the target (satisfaction). 
 I also have a graph to show the correlation between Departure Delay in Minutes and Arrival Delay in Minutes.
 
-<img src="distribution_ageGroup.png" width="450" height="450"> <img src="satisfaction_ageGroup.png" width="450" height="450"> <img src="services_sorted.png" width="450" height="450"> <img src="corr_departure_arrival.png" width="450" height="450"> <img src="corr_featers_satisfaction.png" width="450" height="450"> 
+<img src="distribution_ageGroup.png" width="400" height="450"> <img src="satisfaction_ageGroup.png" width="400" height="450"> <img src="services_sorted.png" width="400" height="450"> <img src="corr_departure_arrival.png" width="400" height="450"> <img src="corr_featers_satisfaction.png" width="400" height="450"> 
 
 ## Models Building
 I started by deleting outliers (rows containing extrem values), then converting the categorical features into numerical. The categories where the order matters I mapped its values. Categories where the order doens't matter I just got pandas dummies for it. After that I divding the dataset into train and test sets with train size of 80% and test size of 20%.

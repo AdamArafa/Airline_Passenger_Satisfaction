@@ -5,23 +5,31 @@ Created on Sat Oct 23 12:37:29 2021
 @author: arafa
 """
 
-import flask
+import flask, json, pickle
 from flask import Flask, jsonify, request
-import json
-from test_data import data_in
+from data_in_test import data_in
 import numpy as np
-import pickle
+from json import JSONEncoder
+
+app = Flask(__name__)
+
+class NumpyArrayEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return JSONEncoder.default(self, obj)
+
 
 def load_models():
-    file_name = 'models/model_file.p'
+    file_name = '../models/model_file.p'
     with open(file_name, 'rb') as pickled:
         data = pickle.load(pickled)
         model = data['model']
     return model
 
 
-app = Flask(__name__)
 @app.route('/predict', methods=['GET'])
+
 def predict():
     # stub input features
     request_json = request.get_json()
@@ -30,11 +38,13 @@ def predict():
     x_in = np.array(x).reshape(1,-1)
     # load model
     model = load_models()
-    prediction = model.predict(x_in)[0]
-    response = json.dumps({'response': prediction})
+    prediction = model.predict(x_in)
+    
+    response = json.dumps({'response': prediction}, cls = NumpyArrayEncoder)
     return response, 200
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
+    
     
